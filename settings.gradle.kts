@@ -29,3 +29,7 @@ dependencyResolutionManagement {
 }
 
 include(":composeApp")
+include(":arabicdict-android")
+include(":arabicdict-desktop")
+include(":arabicdict-shared")
+include(":core:uikit")
