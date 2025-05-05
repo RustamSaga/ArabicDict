@@ -43,12 +43,10 @@ kotlin {
         commonMain.dependencies {
             api(compose.runtime)
             api(compose.foundation)
-            implementation(compose.material)
+            api(compose.material3)
             api(compose.ui)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
-            implementation(libs.androidx.lifecycle.viewmodel)
-            implementation(libs.androidx.lifecycle.runtime.compose)
         }
         desktopMain.dependencies {
             implementation(libs.kotlinx.coroutines.swing)
