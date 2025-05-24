@@ -1,0 +1,17 @@
+<resources>
+    <string name="welcome">Welcome</string>
+    <string name="welcome_message">Enter your Frame.io token to log in.</string>
+    <string name="auth_user_data_hint">Token</string>
+    <string name="next">Next</string>
+    <string name="request_token">Request a token</string>
+    <string name="dont_have_account">Don’t have an account? </string>
+    <string name="signup">Sign Up</string>
+    <string name="auth_in_progress">Authorization...</string>
+    <string name="waiting_message">Please wait a bit</string>
+
+    <string name="error_invalid_auth_text">Invalid input</string>
+    <string name="error_frame_dev_token">Check your Frame.io dev token and try again</string>
+    <string name="error_email_auth_not_supported">Sign in with email/password will be added later</string>
+    <string name="error_server_error">Server error. Try again later</string>
+    <string name="error_unknown">Unknown error</string>
+</resources>
