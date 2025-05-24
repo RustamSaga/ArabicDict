@@ -1,6 +1,5 @@
 package dev.arabicdictionary.pro.arabicdictsdk.data.words.verb
 
-import dev.arabicdictionary.pro.arabicdictsdk.utils.TenseSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

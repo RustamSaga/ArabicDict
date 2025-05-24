@@ -2,7 +2,6 @@ package dev.arabicdictionary.pro.arabicdictsdk.data.words.verb
 
 import dev.arabicdictionary.pro.arabicdictsdk.data.words.GenderType
 import dev.arabicdictionary.pro.arabicdictsdk.data.words.NumberType
-import dev.arabicdictionary.pro.arabicdictsdk.utils.PronounSerializer
 import kotlinx.serialization.Serializable
 
 
