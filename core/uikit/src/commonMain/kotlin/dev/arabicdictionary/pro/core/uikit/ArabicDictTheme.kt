@@ -28,7 +28,7 @@ fun ArabicDictTheme(
     }
 }
 
-object FrameIOTheme {
+object ArabicDictTheme {
     val colors: ColorScheme
         @[Composable ReadOnlyComposable] get() = LocalColorScheme.current
 
