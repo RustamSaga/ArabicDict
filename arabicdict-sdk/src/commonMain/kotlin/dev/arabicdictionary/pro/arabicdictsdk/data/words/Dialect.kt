@@ -28,6 +28,5 @@ data class Dialect(
     @SerialName("id") val id: Int,
     @SerialName("name") val name: String,
     @SerialName("region") val region: String,
-    @SerialName("description") val description: String
+    @SerialName("description") val description: String,
 )
-

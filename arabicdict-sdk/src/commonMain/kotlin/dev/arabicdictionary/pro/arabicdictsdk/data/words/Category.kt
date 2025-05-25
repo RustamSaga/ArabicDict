@@ -32,6 +32,5 @@ import kotlinx.serialization.Serializable
 data class Category(
     @SerialName("id") val id: Int, // Unique identifier of the category.
     @SerialName("name") val name: String, // Name of the category (e.g., "Verb").
-    @SerialName("description") val description: String // Description or explanation of the category.
+    @SerialName("description") val description: String, // Description or explanation of the category.
 )
-

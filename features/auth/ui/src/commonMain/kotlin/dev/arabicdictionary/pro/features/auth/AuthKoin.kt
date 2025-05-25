@@ -7,8 +7,8 @@ import org.koin.core.module.dsl.viewModel
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
-internal fun authFeatureKoinModule(): Module {
-    return module {
+internal fun authFeatureKoinModule(): Module =
+    module {
         viewModel {
             AuthViewModel(
                 navigator = get<Navigator>(),
@@ -25,7 +25,6 @@ internal fun authFeatureKoinModule(): Module {
             // Add scoped dependencies
         }
     }
-}
 
 internal const val AUTH_SCOPE_ID = "dev.arabicdictionary.pro.features.auth"
 

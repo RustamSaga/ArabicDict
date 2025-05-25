@@ -20,6 +20,5 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Root(
     @SerialName("length") val length: Int, // Number of consonants in the root.
-    @SerialName("value") val value: String  // The root letters (e.g., "كتب").
+    @SerialName("value") val value: String, // The root letters (e.g., "كتب").
 )
-

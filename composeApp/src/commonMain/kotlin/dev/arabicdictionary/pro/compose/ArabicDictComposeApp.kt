@@ -1,6 +1,5 @@
 package dev.arabicdictionary.pro.compose
 
-
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -48,10 +47,11 @@ fun ArabicDictComposeApp(onRootBack: () -> Unit) {
                 ) {
                     Box(
                         contentAlignment = Alignment.Center,
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .padding(contentPaddings)
-                            .padding(16.dp),
+                        modifier =
+                            Modifier
+                                .fillMaxSize()
+                                .padding(contentPaddings)
+                                .padding(16.dp),
                     ) {
                         val navTopEntry = rememberNavTopEntry()
                         AnimatedContent(navTopEntry) { navEntry ->
@@ -83,48 +83,50 @@ private fun StubScreen(title: String) {
     }
 }
 
-private fun koinModule(navigator: Navigator): KoinModule {
-    return module {
+private fun koinModule(navigator: Navigator): KoinModule =
+    module {
         factory { navigator }
     }
-}
 
 @Composable
 private fun createNavigator(): Navigator {
     val koinApp = LocalKoinApplication.current
     val urlLauncherProvider: () -> UrlLauncher = { koinApp.get() }
-    val initialState = buildNavState {
-        add(
-            NavStack(
-                id = NavStructure.Id("default"),
-                entry = NavEntry(ArabicDictNavGraph.Alias.Root),
-            ),
-            setCurrent = true,
-        )
-    }
+    val initialState =
+        buildNavState {
+            add(
+                NavStack(
+                    id = NavStructure.Id("default"),
+                    entry = NavEntry(ArabicDictNavGraph.Alias.Root),
+                ),
+                setCurrent = true,
+            )
+        }
     return Navigator(
         initialState = initialState,
-        interceptors = listOf(
-            NavGraphAliasInterceptor(
-                alias = ArabicDictNavGraph.Alias.Main,
-                dest = { ArabicDictNavGraph.Dest.ProjectNavigator() },
+        interceptors =
+            listOf(
+                NavGraphAliasInterceptor(
+                    alias = ArabicDictNavGraph.Alias.Main,
+                    dest = { ArabicDictNavGraph.Dest.ProjectNavigator() },
+                ),
+                NavGraphAliasInterceptor(
+                    alias = ArabicDictNavGraph.Alias.Root,
+                    dest = { ArabicDictNavGraph.Dest.Auth() },
+                ),
+                NavGraphAliasInterceptor(
+                    alias = ArabicDictNavGraph.Alias.Authorization,
+                    dest = { ArabicDictNavGraph.Dest.Auth() },
+                ),
             ),
-            NavGraphAliasInterceptor(
-                alias = ArabicDictNavGraph.Alias.Root,
-                dest = { ArabicDictNavGraph.Dest.Auth() },
-            ),
-            NavGraphAliasInterceptor(
-                alias = ArabicDictNavGraph.Alias.Authorization,
-                dest = { ArabicDictNavGraph.Dest.Auth() },
-            ),
-        ),
     ).apply {
         registerDeepLink(
-            matcher = SimpleUriPattern(
-                schemeRegex = "https?",
-                hostRegex = ".+\\.frame\\.io",
-                pathRegex = ".*",
-            ),
+            matcher =
+                SimpleUriPattern(
+                    schemeRegex = "https?",
+                    hostRegex = ".+\\.frame\\.io",
+                    pathRegex = ".*",
+                ),
         ) { _, uri, _ ->
             urlLauncherProvider().openUrl(uri)
         }

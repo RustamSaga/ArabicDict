@@ -7,9 +7,12 @@ import java.io.File
 
 actual class FileStorage(
     private val baseDir: File,
-    private val dispatcher: CoroutineDispatcher = Dispatchers.IO
+    private val dispatcher: CoroutineDispatcher = Dispatchers.IO,
 ) {
-    actual suspend fun saveData(fileName: String, bytes: ByteArray): String =
+    actual suspend fun saveData(
+        fileName: String,
+        bytes: ByteArray,
+    ): String =
         withContext(dispatcher) {
             val file = File(baseDir, fileName)
             file.writeBytes(bytes)

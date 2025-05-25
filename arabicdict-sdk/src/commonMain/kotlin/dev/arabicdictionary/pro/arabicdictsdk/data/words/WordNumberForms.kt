@@ -23,6 +23,6 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class WordNumberForms(
     @SerialName("singular") val singular: WordId, // The singular form of the word.
-    @SerialName("dual") val dual: WordId,         // The dual form of the word.
-    @SerialName("plural") val plural: WordId      // The plural form of the word.
+    @SerialName("dual") val dual: WordId, // The dual form of the word.
+    @SerialName("plural") val plural: WordId, // The plural form of the word.
 )

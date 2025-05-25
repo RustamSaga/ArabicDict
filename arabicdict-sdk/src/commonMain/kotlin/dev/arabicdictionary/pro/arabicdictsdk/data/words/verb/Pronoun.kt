@@ -4,7 +4,6 @@ import dev.arabicdictionary.pro.arabicdictsdk.data.words.GenderType
 import dev.arabicdictionary.pro.arabicdictsdk.data.words.NumberType
 import kotlinx.serialization.Serializable
 
-
 /**
  * Data class representing an Arabic pronoun with grammatical attributes.
  * This class is used for serializing and deserializing pronoun data including its Arabic forms, grammatical person,
@@ -48,7 +47,5 @@ data class Pronoun(
     val arabicUnvoweled: String, // The pronoun without vowel marks (diacritics).
     val type: PronounType, // The grammatical person (متكلم، مخاطب، غائب).
     val numberType: NumberType, // The number category (مفرد، مثنى، جمع).
-    val genderType: GenderType // The gender category (مذكر، مؤنث، مذكر ومؤنث).
+    val genderType: GenderType, // The gender category (مذكر، مؤنث، مذكر ومؤنث).
 )
-
-

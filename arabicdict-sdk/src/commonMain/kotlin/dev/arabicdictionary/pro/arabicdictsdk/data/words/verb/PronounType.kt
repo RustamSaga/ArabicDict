@@ -2,9 +2,13 @@ package dev.arabicdictionary.pro.arabicdictsdk.data.words.verb
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+
 /**
  * Data class representing a pronoun category in Arabic.
- * This class is used to represent different types of pronouns in Arabic, such as first-person (متكلم), second-person (مخاطب), and third-person (غائب).
+ * This class is used to represent different types of pronouns in Arabic, such as
+ * first-person (متكلم),
+ * second-person (مخاطب),
+ * and third-person (غائب).
  *
  * @property id The unique identifier for the pronoun type.
  * @property arabicVoweled The pronoun type in Arabic with vowel marks (diacritics).
@@ -48,5 +52,5 @@ import kotlinx.serialization.Serializable
 data class PronounType(
     @SerialName("id") val id: Int, // The unique identifier for the pronoun type.
     @SerialName("arabic_voweled") val arabicVoweled: String, // The pronoun type in Arabic with vowel marks.
-    @SerialName("arabic_unvoweled") val arabicUnvoweled: String // The pronoun type in Arabic without vowel marks.
+    @SerialName("arabic_unvoweled") val arabicUnvoweled: String, // The pronoun type in Arabic without vowel marks.
 )

@@ -77,5 +77,5 @@ data class Conjugation(
     @SerialName("voice") val voice: VerbVoice, // Verb voice (معلوم، مجهول).
     @SerialName("pronoun") val pronoun: Pronoun, // Associated pronoun.
     @SerialName("verb_confirmed") val verbConfirmed: VerbConfirmed, // Whether confirmed (نون التوكيد) is applied.
-    @SerialName("arabic_grammar_case") val arabicGrammarCase: ArabicGrammarCase // Grammatical case (مرفوع، منصوب، مجزوم).
+    @SerialName("arabic_grammar_case") val arabicGrammarCase: ArabicGrammarCase, // Grammatical case (مرفوع، منصوب، مجزوم).
 )

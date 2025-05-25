@@ -8,10 +8,10 @@ interface AuthApi {
     suspend fun isValid(): Response<Unit>
 }
 //
-//interface AuthApi {
+// interface AuthApi {
 //    @POST("auth/login")
 //    suspend fun login(@Body body: LoginRequest): AuthResponse
 //
 //    @POST("auth/register")
 //    suspend fun register(@Body body: RegisterRequest): AuthResponse
-//}
+// }

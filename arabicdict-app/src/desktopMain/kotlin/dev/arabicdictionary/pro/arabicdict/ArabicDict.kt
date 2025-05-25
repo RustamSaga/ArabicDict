@@ -10,19 +10,19 @@ import dev.arabicdictionary.pro.core.utils.PlatformContext
 import org.koin.core.context.startKoin
 
 @Suppress("ktlint:standard:function-signature")
-fun main() = application {
-    startKoin {
-        initKoinApp(
-            platformContext = PlatformContext.INSTANCE,
-            isDebug = false,
-        )
-    }
+fun main() =
+    application {
+        startKoin {
+            initKoinApp(
+                platformContext = PlatformContext.INSTANCE,
+                isDebug = false,
+            )
+        }
 
-    Window(
-        onCloseRequest = ::exitApplication,
-        title = "ArabicDict",
-    ) {
-        ArabicDictComposeApp(onRootBack = { exitApplication() })
+        Window(
+            onCloseRequest = ::exitApplication,
+            title = "ArabicDict",
+        ) {
+            ArabicDictComposeApp(onRootBack = { exitApplication() })
+        }
     }
-}
-

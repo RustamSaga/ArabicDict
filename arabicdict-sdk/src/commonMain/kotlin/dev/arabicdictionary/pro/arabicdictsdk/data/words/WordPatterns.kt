@@ -30,7 +30,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class WordPatterns(
     @SerialName("diacritical_stem") val diacriticalStem: Pattern, // جذر الكلمة بالتشكيل
-    @SerialName("canonical_stem") val canonicalStem: Pattern,     // جذر الكلمة بدون تشكيل
+    @SerialName("canonical_stem") val canonicalStem: Pattern, // جذر الكلمة بدون تشكيل
     @SerialName("diacritical_lemma") val diacriticalLemma: Pattern, // الصيغة المعجمية بالتشكيل
-    @SerialName("canonical_lemma") val canonicalLemma: Pattern      // الصيغة المعجمية بدون تشكيل
+    @SerialName("canonical_lemma") val canonicalLemma: Pattern, // الصيغة المعجمية بدون تشكيل
 )

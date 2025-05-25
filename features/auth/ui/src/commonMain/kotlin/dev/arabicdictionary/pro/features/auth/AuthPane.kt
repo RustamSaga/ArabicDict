@@ -1,6 +1,5 @@
 package dev.arabicdictionary.pro.features.auth
 
-
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Spacer
@@ -30,7 +29,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withLink
 import androidx.compose.ui.unit.dp
-import dev.arabicdictionary.pro.core.uikit.ArabicDictTheme
 import arabicdictionarypro.features.auth.ui.generated.resources.Res
 import arabicdictionarypro.features.auth.ui.generated.resources.auth_in_progress
 import arabicdictionarypro.features.auth.ui.generated.resources.auth_user_data_hint
@@ -46,6 +44,7 @@ import arabicdictionarypro.features.auth.ui.generated.resources.signup
 import arabicdictionarypro.features.auth.ui.generated.resources.waiting_message
 import arabicdictionarypro.features.auth.ui.generated.resources.welcome
 import arabicdictionarypro.features.auth.ui.generated.resources.welcome_message
+import dev.arabicdictionary.pro.core.uikit.ArabicDictTheme
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.module.rememberKoinModules
 import org.koin.compose.scope.KoinScope
@@ -70,14 +69,15 @@ private fun AuthPane(
     modifier: Modifier = Modifier,
 ) {
     when (val state = viewModel.state.collectAsState().value) {
-        is AuthState.Default -> AuthPane(
-            state,
-            onNextClick = { viewModel.onEvent(AuthEvent.OnNextClicked()) },
-            onRequestTokenClick = { viewModel.onEvent(AuthEvent.OnRequestTokenClick()) },
-            onSignUpClick = { viewModel.onEvent(AuthEvent.OnSignUpClick()) },
-            onUserAuthTextChange = { text -> viewModel.onEvent(AuthEvent.OnUserAuthTextChanged(text)) },
-            modifier = modifier,
-        )
+        is AuthState.Default ->
+            AuthPane(
+                state,
+                onNextClick = { viewModel.onEvent(AuthEvent.OnNextClicked()) },
+                onRequestTokenClick = { viewModel.onEvent(AuthEvent.OnRequestTokenClick()) },
+                onSignUpClick = { viewModel.onEvent(AuthEvent.OnSignUpClick()) },
+                onUserAuthTextChange = { text -> viewModel.onEvent(AuthEvent.OnUserAuthTextChanged(text)) },
+                modifier = modifier,
+            )
 
         is AuthState.Loading -> Authorizing(modifier)
     }
@@ -175,24 +175,27 @@ internal fun AuthPane(
 
 @Composable
 private fun ColumnScope.SignUp(onSignUpClick: () -> Unit) {
-    val text = buildAnnotatedString {
-        append(stringResource(Res.string.dont_have_account))
-        withLink(
-            LinkAnnotation.Clickable(
-                tag = "frame_signup",
-                styles = TextLinkStyles(
-                    style = SpanStyle(
-                        color = ArabicDictTheme.colors.primary,
-                        fontWeight = FontWeight.Bold,
-                        textDecoration = TextDecoration.Underline,
-                    ),
+    val text =
+        buildAnnotatedString {
+            append(stringResource(Res.string.dont_have_account))
+            withLink(
+                LinkAnnotation.Clickable(
+                    tag = "frame_signup",
+                    styles =
+                        TextLinkStyles(
+                            style =
+                                SpanStyle(
+                                    color = ArabicDictTheme.colors.primary,
+                                    fontWeight = FontWeight.Bold,
+                                    textDecoration = TextDecoration.Underline,
+                                ),
+                        ),
+                    linkInteractionListener = { onSignUpClick() },
                 ),
-                linkInteractionListener = { onSignUpClick() },
-            ),
-        ) {
-            append(stringResource(Res.string.signup))
+            ) {
+                append(stringResource(Res.string.signup))
+            }
         }
-    }
 
     Text(
         text,

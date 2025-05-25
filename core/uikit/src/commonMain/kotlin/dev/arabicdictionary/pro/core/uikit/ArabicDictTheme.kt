@@ -2,10 +2,10 @@ package dev.arabicdictionary.pro.core.uikit
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Typography
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ReadOnlyComposable
-import androidx.compose.material3.Typography
 
 @Composable
 fun ArabicDictTheme(

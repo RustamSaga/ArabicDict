@@ -28,5 +28,5 @@ data class WordId(
     @SerialName("id") val id: Int, // Unique word identifier.
     @SerialName("arabic_voweled") val arabicVoweled: String, // Arabic form with diacritics.
     @SerialName("arabic_unvoweled") val arabicUnvoweled: String, // Arabic form without diacritics.
-    @SerialName("base_word_type") val baseWordType: BaseWordType
+    @SerialName("base_word_type") val baseWordType: BaseWordType,
 )

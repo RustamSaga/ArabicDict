@@ -11,21 +11,22 @@ private val NAV_STACK_DEFAULT = NavStructure.Id("default")
 class NavStateTest {
     @Test
     fun buildNavState() {
-        val actual = dev.arabicdictionary.pro.navstate.buildNavState {
-            add(
-                buildNavStack(id = NAV_STACK_DEFAULT) {
-                    add(NavEntry(TestNavDestinations.Root))
-                },
-                setCurrent = true,
-
+        val actual =
+            dev.arabicdictionary.pro.navstate.buildNavState {
+                add(
+                    buildNavStack(id = NAV_STACK_DEFAULT) {
+                        add(NavEntry(TestNavDestinations.Root))
+                    },
+                    setCurrent = true,
                 )
-        }
+            }
 
         val stack = NavStack(id = NAV_STACK_DEFAULT, entries = listOf(NavEntry(TestNavDestinations.Root)))
-        val expected = NavState(
-            structures = setOf(stack),
-            currentId = stack.id,
-        )
+        val expected =
+            NavState(
+                structures = setOf(stack),
+                currentId = stack.id,
+            )
 
         assertEquals(expected, actual)
     }

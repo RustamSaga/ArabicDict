@@ -15,8 +15,9 @@ import kotlinx.serialization.Serializable
  * @property subject The word used as the **subject** (الفاعل) — the doer of the action.
  * @property obj The word used as the **object** (المفعول) — the receiver of the action.
  * @property superlative The word representing a **superlative form** (اسم التفضيل) — e.g., "أَكْبَر", "أَفْضَل".
- * @property instrument The word used as an **instrument noun** (اسم الآلة) — a tool used to perform the action (e.g., "مِفْتَاح").
- * @property adverbial The word used as a **noun of adverbial meaning** (اسم الظرف) — indicating time or place (e.g., "أمام", "فوق", "غدًا").
+ * @property instrument The word used as an **instrument noun** (اسم الآلة) — a tool used to perform the action (e.g., "مِفْتَاح")
+ * @property adverbial The word used as a **noun of adverbial meaning**
+ * (اسم الظرف) — indicating time or place (e.g., "أمام", "فوق", "غدًا").
  *
  * ### Example usage:
  * ```kotlin
@@ -56,10 +57,10 @@ import kotlinx.serialization.Serializable
  */
 @Serializable
 data class VerbGrammaticalRoles(
-    @SerialName("subject") val subject: WordId? = null,            // الفاعل
-    @SerialName("object") val obj: WordId? = null,                 // المفعول
-    @SerialName("superlative") val superlative: WordId? = null,   // اسم التفضيل
-    @SerialName("instrument") val instrument: WordId? = null,     // اسم الآلة
-    @SerialName("adverbial") val adverbial: WordId? = null,        // اسم الظرف
-    @SerialName("transitivity") val transitivity: WordId? = null        // الصيرورة
+    @SerialName("subject") val subject: WordId? = null, // الفاعل
+    @SerialName("object") val obj: WordId? = null, // المفعول
+    @SerialName("superlative") val superlative: WordId? = null, // اسم التفضيل
+    @SerialName("instrument") val instrument: WordId? = null, // اسم الآلة
+    @SerialName("adverbial") val adverbial: WordId? = null, // اسم الظرف
+    @SerialName("transitivity") val transitivity: WordId? = null, // الصيرورة
 )

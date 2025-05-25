@@ -31,5 +31,5 @@ import kotlinx.serialization.Serializable
 data class VerbVoice(
     @SerialName("id") val id: Int, // The unique identifier for the verb voice.
     @SerialName("arabic_voweled") val arabicVoweled: String, // The verb voice in Arabic with vowel marks.
-    @SerialName("arabic_unvoweled") val arabicUnvoweled: String // The verb voice in Arabic without vowel marks.
+    @SerialName("arabic_unvoweled") val arabicUnvoweled: String, // The verb voice in Arabic without vowel marks.
 )

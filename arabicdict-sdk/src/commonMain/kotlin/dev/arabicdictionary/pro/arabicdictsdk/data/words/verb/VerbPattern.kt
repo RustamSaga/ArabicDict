@@ -9,5 +9,5 @@ data class VerbPattern(
     @SerialName("arabic_voweled") val arabicVoweled: String,
     @SerialName("arabic_unvoweled") val arabicUnvoweled: String,
     @SerialName("type") val type: String,
-    @SerialName("length") val length: Int
+    @SerialName("length") val length: Int,
 )

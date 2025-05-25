@@ -24,8 +24,7 @@ import kotlinx.serialization.Serializable
  */
 @Serializable
 data class WordType(
-    @SerialName("id") val id: Int, // Unique ID for the word type.
-    @SerialName("arabic_voweled") val arabicVoweled: String, // Word type with vowel marks (tashkīl).
-    @SerialName("arabic_unvoweled") val arabicUnvoweled: String // Word type without vowel marks.
+    @SerialName("id") val id: Int,
+    @SerialName("arabic_voweled") val arabicVoweled: String,
+    @SerialName("arabic_unvoweled") val arabicUnvoweled: String,
 )
-

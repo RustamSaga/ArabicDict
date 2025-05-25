@@ -1,6 +1,5 @@
 package dev.arabicdictionary.pro.core.uikit
 
-
 import androidx.compose.foundation.shape.CornerBasedShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Immutable
@@ -10,8 +9,8 @@ import androidx.compose.material3.Shapes as M3Shapes
 
 internal val LocalShapes = staticCompositionLocalOf { shapes() }
 
-internal fun shapes(): Shapes {
-    return Shapes(
+internal fun shapes(): Shapes =
+    Shapes(
         none = RoundedCornerShape(size = 0.dp),
         extraSmall = RoundedCornerShape(size = 6.dp),
         small = RoundedCornerShape(size = 8.dp),
@@ -20,7 +19,6 @@ internal fun shapes(): Shapes {
         extraLarge = RoundedCornerShape(size = 28.dp),
         full = RoundedCornerShape(percent = 50),
     )
-}
 
 @Immutable
 data class Shapes(
@@ -33,12 +31,11 @@ data class Shapes(
     val full: CornerBasedShape,
 )
 
-internal fun Shapes.toM3Shapes(): M3Shapes {
-    return M3Shapes(
+internal fun Shapes.toM3Shapes(): M3Shapes =
+    M3Shapes(
         small = small,
         medium = medium,
         large = large,
         extraLarge = extraLarge,
         extraSmall = extraSmall,
     )
-}

@@ -15,7 +15,6 @@ import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.ClassDiscriminatorMode
 import kotlinx.serialization.json.Json
 
-
 class ArabicDictClient internal constructor(
     private val baseUrl: String,
     private val httpClient: HttpClient,
@@ -67,8 +66,8 @@ suspend fun validateFrameDeveloperToken(
 private fun frameHttpClient(
     developerToken: DeveloperToken,
     json: Json? = null,
-): HttpClient {
-    return HttpClient {
+): HttpClient =
+    HttpClient {
         install(Auth) {
             bearer {
                 loadTokens {
@@ -83,12 +82,10 @@ private fun frameHttpClient(
             }
         }
     }
-}
 
-private fun jsonForFrame(baseJson: Json): Json {
-    return Json(from = baseJson) {
+private fun jsonForFrame(baseJson: Json): Json =
+    Json(from = baseJson) {
         ignoreUnknownKeys = true
         classDiscriminator = "_type"
         classDiscriminatorMode = ClassDiscriminatorMode.POLYMORPHIC
     }
-}

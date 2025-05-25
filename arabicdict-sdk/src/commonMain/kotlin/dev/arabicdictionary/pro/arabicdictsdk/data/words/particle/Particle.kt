@@ -14,5 +14,5 @@ data class Particle(
     @SerialName("cliticType") val cliticType: CliticType,
     @SerialName("meanings") val meanings: List<Meanings>,
     @SerialName("word_types") val wordTypes: List<WordType>,
-    @SerialName("categories") val categories: List<Category>
+    @SerialName("categories") val categories: List<Category>,
 )

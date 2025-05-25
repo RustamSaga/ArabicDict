@@ -8,12 +8,9 @@ import org.koin.core.logger.PrintLogger
 import org.koin.core.module.Module
 import org.koin.dsl.module
 
-internal actual fun defaultKoinLogger(level: Level): Logger {
-    return PrintLogger(level)
-}
+internal actual fun defaultKoinLogger(level: Level): Logger = PrintLogger(level)
 
-internal actual fun platformKoinModule(platformContext: PlatformContext): Module {
-    return module {
+internal actual fun platformKoinModule(platformContext: PlatformContext): Module =
+    module {
         factory { UrlLauncher() }
     }
-}

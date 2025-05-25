@@ -34,6 +34,5 @@ data class WordDialect(
     @SerialName("id") val id: Int,
     @SerialName("arabic_voweled") val arabicVoweled: String,
     @SerialName("arabic_unvoweled") val arabicUnvoweled: String,
-    @SerialName("dialect") val dialect: Dialect
+    @SerialName("dialect") val dialect: Dialect,
 )
-

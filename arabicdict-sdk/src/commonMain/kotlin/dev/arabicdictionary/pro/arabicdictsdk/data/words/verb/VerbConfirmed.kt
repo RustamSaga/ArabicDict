@@ -31,5 +31,5 @@ import kotlinx.serialization.Serializable
 data class VerbConfirmed(
     @SerialName("id") val id: Int,
     @SerialName("arabic_voweled") val arabicVoweled: String,
-    @SerialName("arabic_unvoweled") val arabicUnvoweled: String
+    @SerialName("arabic_unvoweled") val arabicUnvoweled: String,
 )

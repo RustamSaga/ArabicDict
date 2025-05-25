@@ -3,7 +3,6 @@ package dev.arabicdictionary.pro.arabicdictsdk.data.words.verb
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-
 /**
  * Data class representing a verb tense category in Arabic.
  * This class is used to distinguish between different verb tenses such as the past, present, imperative, and emphatic (توكيد).
@@ -37,5 +36,5 @@ import kotlinx.serialization.Serializable
 data class Tense(
     @SerialName("id") val id: Int,
     @SerialName("arabic_voweled") val arabicVoweled: String,
-    @SerialName("arabic_unvoweled") val arabicUnvoweled: String
+    @SerialName("arabic_unvoweled") val arabicUnvoweled: String,
 )

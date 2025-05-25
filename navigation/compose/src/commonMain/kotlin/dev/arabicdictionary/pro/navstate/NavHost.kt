@@ -53,11 +53,12 @@ public fun NavHost(
     content: @Composable () -> Unit,
 ) {
     NavHost(
-        initialState = buildNavState {
-            val navStack = NavStack(id = initialStackId, entry = NavEntry(initialDestination))
-            add(navStack)
-            setCurrent(navStack.id)
-        },
+        initialState =
+            buildNavState {
+                val navStack = NavStack(id = initialStackId, entry = NavEntry(initialDestination))
+                add(navStack)
+                setCurrent(navStack.id)
+            },
         onRootBack,
         content,
     )

@@ -11,6 +11,5 @@ data class WordSummary(
     @SerialName("translations") val translations: List<String>,
     @SerialName("word_types") val wordTypes: List<WordType>,
     @SerialName("categories") val categories: List<Category>,
-    @SerialName("image_url") val imageUrl: String? = null
-
+    @SerialName("image_url") val imageUrl: String? = null,
 )

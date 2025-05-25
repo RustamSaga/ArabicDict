@@ -2,7 +2,6 @@ package dev.arabicdictionary.pro.arabicdictsdk
 
 import dev.arabicdictionary.pro.arabicdictsdk.data.ArabicApiError
 
-
 /**
  * Represents the result of an API operation.
  */

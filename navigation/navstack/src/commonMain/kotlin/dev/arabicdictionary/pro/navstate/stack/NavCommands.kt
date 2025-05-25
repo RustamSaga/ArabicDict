@@ -5,7 +5,6 @@ import dev.arabicdictionary.pro.navstate.NavEntry
 import dev.arabicdictionary.pro.navstate.NavStructure
 import dev.arabicdictionary.pro.navstate.buildNavState
 
-
 public fun NavCommand.popTop(count: Int = 1): NavCommand {
     require(count > 0) { "Count must be positive value" }
     return then { state ->
@@ -25,10 +24,9 @@ public fun NavCommand.popTop(count: Int = 1): NavCommand {
 public fun NavCommand.newStack(
     id: NavStructure.Id,
     entry: NavEntry,
-): NavCommand {
-    return then { state ->
+): NavCommand =
+    then { state ->
         state.buildNavState {
             add(NavStack(id, listOf(entry)))
         }
     }
-}

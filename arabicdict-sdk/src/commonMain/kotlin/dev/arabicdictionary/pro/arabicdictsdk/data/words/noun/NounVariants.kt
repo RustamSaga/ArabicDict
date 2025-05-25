@@ -64,6 +64,5 @@ data class NounVariants(
     @SerialName("masculine") val masculine: WordNumberForms,
     @SerialName("relative_adjectives") val relativeAdjectives: WordNumberForms, // النسب
     @SerialName("wonder") val wonder: WordNumberForms, // التعجب
-    @SerialName("diminutive") val diminutive: WordNumberForms //  التصغير
+    @SerialName("diminutive") val diminutive: WordNumberForms, //  التصغير
 )
-

@@ -21,5 +21,5 @@ data class NounMorphology(
     @SerialName("original") val original: WordId,
     @SerialName("gender") val gender: NounGender,
     @SerialName("number_type") val numberType: NumberType,
-    @SerialName("morphological_features") val morphologicalFeatures: NounMorphologicalFeatures
+    @SerialName("morphological_features") val morphologicalFeatures: NounMorphologicalFeatures,
 )

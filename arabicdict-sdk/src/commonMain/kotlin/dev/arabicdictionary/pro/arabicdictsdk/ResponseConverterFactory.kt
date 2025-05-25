@@ -4,11 +4,10 @@ import de.jensklingenberg.ktorfit.Ktorfit
 import de.jensklingenberg.ktorfit.converter.Converter
 import de.jensklingenberg.ktorfit.converter.KtorfitResult
 import de.jensklingenberg.ktorfit.converter.TypeData
+import dev.arabicdictionary.pro.arabicdictsdk.Response
 import io.ktor.client.call.body
 import io.ktor.client.statement.HttpResponse
 import dev.arabicdictionary.pro.arabicdictsdk.Response as ArabicResponse
-import dev.arabicdictionary.pro.arabicdictsdk.Response
-
 
 internal class ResponseConverterFactory : Converter.Factory {
     override fun suspendResponseConverter(
@@ -17,20 +16,19 @@ internal class ResponseConverterFactory : Converter.Factory {
     ): Converter.SuspendResponseConverter<HttpResponse, *>? {
         if (typeData.typeInfo.type == ArabicResponse::class) {
             return object : Converter.SuspendResponseConverter<HttpResponse, Any> {
-                override suspend fun convert(result: KtorfitResult): Any {
-                    return when (result) {
+                override suspend fun convert(result: KtorfitResult): Any =
+                    when (result) {
                         is KtorfitResult.Failure -> ArabicResponse.Error(result.throwable)
                         is KtorfitResult.Success -> result.toFrameResponse(typeData)
                     }
-                }
             }
         }
         return null
     }
 
     @Suppress("MagicNumber")
-    private suspend fun KtorfitResult.Success.toFrameResponse(typeData: TypeData): ArabicResponse<*> {
-        return when {
+    private suspend fun KtorfitResult.Success.toFrameResponse(typeData: TypeData): ArabicResponse<*> =
+        when {
             response.status.value in 200..299 && typeData.typeArgs[0].typeInfo.type == Unit::class ->
                 ArabicResponse.Success<Unit>(
                     httpCode = response.status.value,
@@ -49,5 +47,4 @@ internal class ResponseConverterFactory : Converter.Factory {
                     error = response.body(typeData.typeArgs.first().typeInfo),
                 )
         }
-    }
 }

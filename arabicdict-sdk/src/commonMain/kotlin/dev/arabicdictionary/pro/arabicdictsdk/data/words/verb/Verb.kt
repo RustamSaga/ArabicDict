@@ -3,11 +3,6 @@ package dev.arabicdictionary.pro.arabicdictsdk.data.words.verb
 import dev.arabicdictionary.pro.arabicdictsdk.data.words.Category
 import dev.arabicdictionary.pro.arabicdictsdk.data.words.Meanings
 import dev.arabicdictionary.pro.arabicdictsdk.data.words.Relations
-import dev.arabicdictionary.pro.arabicdictsdk.data.words.Root
-import dev.arabicdictionary.pro.arabicdictsdk.data.words.StructureType
-import dev.arabicdictionary.pro.arabicdictsdk.data.words.WordId
-import dev.arabicdictionary.pro.arabicdictsdk.data.words.WordPatterns
-import dev.arabicdictionary.pro.arabicdictsdk.data.words.WordType
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -48,4 +43,3 @@ data class Verb(
     @SerialName("relations") val relations: Relations,
     @SerialName("verb_morphology") val verbMorphology: VerbMorphology,
 )
-

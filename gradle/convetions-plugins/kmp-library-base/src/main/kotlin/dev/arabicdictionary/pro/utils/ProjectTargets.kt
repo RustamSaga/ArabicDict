@@ -2,7 +2,6 @@
 
 package dev.arabicdictionary.pro.utils
 
-
 /**
  * Targets for the project
  */

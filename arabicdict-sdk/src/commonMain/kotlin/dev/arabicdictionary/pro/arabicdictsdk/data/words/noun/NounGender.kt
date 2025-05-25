@@ -3,6 +3,7 @@ package dev.arabicdictionary.pro.arabicdictsdk.data.words.noun
 import dev.arabicdictionary.pro.arabicdictsdk.data.words.GenderType
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+
 /**
  * Data class representing the grammatical and semantic gender of a noun in Arabic.
  *
@@ -31,5 +32,3 @@ data class NounGender(
     @SerialName("unvoweled_gender_subtype") val unvoweledGenderSubtype: String,
     @SerialName("gender_type") val genderType: GenderType,
 )
-
-

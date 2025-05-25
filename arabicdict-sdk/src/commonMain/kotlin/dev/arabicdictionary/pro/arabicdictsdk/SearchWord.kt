@@ -6,7 +6,5 @@ import kotlinx.serialization.Serializable
 @Suppress("PLUGIN_IS_NOT_ENABLED")
 @Serializable
 data class SearchWord(
-    @SerialName("accountId") private val accountId: String
-) {
-
-}
+    @SerialName("accountId") private val accountId: String,
+)

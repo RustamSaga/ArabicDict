@@ -39,5 +39,5 @@ data class Translation(
     @SerialName("translation_word_id") val translationWordId: Int,
     @SerialName("translate") val translate: String, // The translated word or phrase.
     @SerialName("language") val language: String,
-    @SerialName("meaning_id") val meaningId: Int
+    @SerialName("meaning_id") val meaningId: Int,
 )

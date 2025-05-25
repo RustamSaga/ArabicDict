@@ -1,6 +1,5 @@
 package dev.arabicdictionary.pro.navstate.deeplink
 
-
 /**
  * <scheme>://<host>/<path with params>
  * <param> - {name} can contains a-Z, 0-9, `-`
@@ -18,12 +17,13 @@ public data class SimpleUriPattern(
      */
     private val pathParams = mutableSetOf<String>()
 
-    private val uriRegex = Regex(
-        prepareScheme(schemeRegex) +
+    private val uriRegex =
+        Regex(
+            prepareScheme(schemeRegex) +
                 Regex.escape("://") +
                 prepareHost(hostRegex) +
                 preparePath(pathRegex, pathParams),
-    )
+        )
 
     override fun matches(uri: String): Boolean = uriRegex.matches(uri)
 
@@ -45,9 +45,7 @@ public data class SimpleUriPattern(
             schemeRegex: String = ANY_REGEX,
             hostRegex: String = ANY_REGEX,
             pathRegex: String = ANY_REGEX,
-        ): SimpleUriPattern {
-            return SimpleUriPattern(schemeRegex, hostRegex, pathRegex)
-        }
+        ): SimpleUriPattern = SimpleUriPattern(schemeRegex, hostRegex, pathRegex)
     }
 
     public data class MatchResult(
@@ -59,10 +57,9 @@ public data class SimpleUriPattern(
     ) : UriMatcher.MatchResult
 }
 
-private fun MatchResult.findGroup(key: String): String {
-    return groups[key]?.value
+private fun MatchResult.findGroup(key: String): String =
+    groups[key]?.value
         ?: throw IncorrectUriFormat("Group with key `$key` was not found")
-}
 
 private const val GROUP_SCHEME = "scheme"
 private const val GROUP_HOST = "host"
@@ -73,11 +70,12 @@ private const val PATH_REGEX = "[\\w{}\\-_/?]+)?"
 private const val SCHEME_REGEX = "[\\w{}]+)\\Q://\\E"
 private const val ANY_REGEX: String = "*"
 
-private val FULL_URI_REGEX = Regex(
-    "(?<$GROUP_SCHEME>$SCHEME_REGEX" +
+private val FULL_URI_REGEX =
+    Regex(
+        "(?<$GROUP_SCHEME>$SCHEME_REGEX" +
             "(?<$GROUP_HOST>$HOST_PORT_REGEX" +
             "(?<$GROUP_PATH>$PATH_REGEX",
-)
+    )
 
 private fun preparePath(
     path: String,
@@ -107,21 +105,21 @@ private fun preparePath(
     }
 }
 
-private fun prepareHost(host: String): String {
-    return if (host == ANY_REGEX) "(?<$GROUP_HOST>[\\w-_.]+)" else "(?<$GROUP_HOST>$host)"
-}
+private fun prepareHost(host: String): String = if (host == ANY_REGEX) "(?<$GROUP_HOST>[\\w-_.]+)"
+else "(?<$GROUP_HOST>$host)"
 
-private fun prepareScheme(scheme: String): String {
-    return if (scheme == ANY_REGEX) "(?<$GROUP_SCHEME>[\\w]+)" else "(?<$GROUP_SCHEME>$scheme)"
-}
+private fun prepareScheme(scheme: String): String = if (scheme == ANY_REGEX) "(?<$GROUP_SCHEME>[\\w]+)"
+else "(?<$GROUP_SCHEME>$scheme)"
 
 public fun SimpleUriPattern(uriPattern: String): SimpleUriPattern {
-    val matchResult = requireNotNull(FULL_URI_REGEX.matchEntire(uriPattern)) {
-        "Illegal uri pattern format '$uriPattern'"
-    }
+    val matchResult =
+        requireNotNull(FULL_URI_REGEX.matchEntire(uriPattern)) {
+            "Illegal uri pattern format '$uriPattern'"
+        }
     return SimpleUriPattern(
-        schemeRegex = matchResult.groups[GROUP_SCHEME]!!.value.takeIf { it.isNotEmpty() }
-            ?: ANY_REGEX,
+        schemeRegex =
+            matchResult.groups[GROUP_SCHEME]!!.value.takeIf { it.isNotEmpty() }
+                ?: ANY_REGEX,
         hostRegex = matchResult.groups[GROUP_HOST]!!.value.takeIf { it.isNotEmpty() } ?: ANY_REGEX,
         pathRegex = matchResult.groups[GROUP_PATH]!!.value.takeIf { it.isNotEmpty() } ?: ANY_REGEX,
     )

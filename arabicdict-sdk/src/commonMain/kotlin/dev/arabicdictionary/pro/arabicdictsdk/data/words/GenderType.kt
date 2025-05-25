@@ -33,5 +33,5 @@ import kotlinx.serialization.Serializable
 data class GenderType(
     @SerialName("id") val id: Int, // The unique identifier for the gender type.
     @SerialName("arabic_voweled") val arabicVoweled: String, // The gender type in Arabic with vowel marks.
-    @SerialName("arabic_unvoweled") val arabicUnvoweled: String // The gender type in Arabic without vowel marks.
+    @SerialName("arabic_unvoweled") val arabicUnvoweled: String, // The gender type in Arabic without vowel marks.
 )

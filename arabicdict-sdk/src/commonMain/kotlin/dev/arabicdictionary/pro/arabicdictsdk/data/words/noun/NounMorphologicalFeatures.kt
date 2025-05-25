@@ -18,5 +18,5 @@ data class NounMorphologicalFeatures(
     @SerialName("can_have_tanween") val canHaveTanween: Boolean,
     @SerialName("can_have_plural") val canHavePlural: Boolean,
     @SerialName("can_have_qualitative_adjectives") val canHaveQualitativeAdjectives: Boolean,
-    @SerialName("can_have_relative_adjectives") val canHaveRelativeAdjectives: Boolean
+    @SerialName("can_have_relative_adjectives") val canHaveRelativeAdjectives: Boolean,
 )

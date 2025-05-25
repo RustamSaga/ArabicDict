@@ -1,6 +1,5 @@
 package dev.arabicdictionary.pro.navstate.deeplink
 
-
 /**
  * Check that input Uri matches you pattern and you can handle it
  */

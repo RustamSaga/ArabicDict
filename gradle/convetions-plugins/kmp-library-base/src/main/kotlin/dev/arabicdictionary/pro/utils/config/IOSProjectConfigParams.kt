@@ -2,12 +2,13 @@ package dev.arabicdictionary.pro.utils.config
 
 import org.gradle.api.Project
 
-internal val supportedIOSTargetsParam = ProjectConfigParam(
-    cmdParamName = "kmp.ios.platforms",
-    androidLocalPropertyParamName = "kmp.ios.platforms",
-    envParamName = "KMP_IOS_PLATFORMS",
-    defaultValue = "arm64,simulatorArmX64,simulatorIntelX64",
-)
+internal val supportedIOSTargetsParam =
+    ProjectConfigParam(
+        cmdParamName = "kmp.ios.platforms",
+        androidLocalPropertyParamName = "kmp.ios.platforms",
+        envParamName = "KMP_IOS_PLATFORMS",
+        defaultValue = "arm64,simulatorArmX64,simulatorIntelX64",
+    )
 
 enum class IOSPlatform(
     val value: String,

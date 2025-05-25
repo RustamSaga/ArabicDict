@@ -3,7 +3,6 @@ package dev.arabicdictionary.pro.arabicdictsdk.data.words
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-
 /**
  * Represents the semantic content of a word, including its definitions, translations,
  * and associated semantic categories.
@@ -58,5 +57,5 @@ data class Meanings(
     @SerialName("definition") val definition: List<Definition>,
     @SerialName("translation") val translation: List<Translation>,
     @SerialName("image_url") val imagesUrl: List<String>,
-    @SerialName("categories") val categories: List<Category> // Categories describing the word's role or type.
+    @SerialName("categories") val categories: List<Category>, // Categories describing the word's role or type.
 )

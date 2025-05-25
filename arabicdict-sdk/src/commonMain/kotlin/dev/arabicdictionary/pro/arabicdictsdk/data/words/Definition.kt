@@ -32,10 +32,9 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Definition(
     @SerialName("source_name") val sourceName: String, // Source of the definition.
-    @SerialName("id") val id: Int,                     // Unique definition ID.
+    @SerialName("id") val id: Int, // Unique definition ID.
     @SerialName("arabic_word_id") val arabicWordId: Int,
-    @SerialName("definition") val definition: String,   // The actual arabic definition text.
+    @SerialName("definition") val definition: String, // The actual arabic definition text.
     @SerialName("translation") val translation: String,
-    @SerialName("translation_language") val language: String
+    @SerialName("translation_language") val language: String,
 )
-

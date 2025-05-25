@@ -1,6 +1,5 @@
 package dev.arabicdictionary.pro.navstate
 
-
 /**
  * Switch between already created task. If task doesn't exist then do nothing
  */
@@ -57,17 +56,18 @@ public fun NavCommand.forward(
     tags: List<Any> = emptyList(),
 ): NavCommand =
     then { state ->
-        val curNavEntryStruct = state.structures
-            .asSequence()
-            .filterIsInstance<NavEntriesStructure.Forward>()
-            .first { it.id == structId }
+        val curNavEntryStruct =
+            state.structures
+                .asSequence()
+                .filterIsInstance<NavEntriesStructure.Forward>()
+                .first { it.id == structId }
         state.buildNavState {
             add(curNavEntryStruct.forward(NavEntry(dest, tags)))
         }
     }
 
-public fun NavCommand.back(): NavCommand {
-    return then { state ->
+public fun NavCommand.back(): NavCommand =
+    then { state ->
         state.buildNavState {
             add(
                 checkNotNull((state.current as NavEntriesStructure.Back).back(stepsBack = 1)) {
@@ -76,4 +76,3 @@ public fun NavCommand.back(): NavCommand {
             )
         }
     }
-}

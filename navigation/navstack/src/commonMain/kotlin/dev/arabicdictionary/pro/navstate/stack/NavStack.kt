@@ -43,57 +43,52 @@ public data class NavStack(
         }
     }
 
-    override fun copy(entries: List<NavEntry>): NavStack {
-        return copy(id = id, entries = entries, parent = parent)
-    }
+    override fun copy(entries: List<NavEntry>): NavStack = copy(id = id, entries = entries, parent = parent)
 }
 
 public fun NavStack(
     id: NavStructure.Id,
     entry: NavEntry,
     parent: NavStructure? = null,
-): NavStack {
-    return NavStack(id, listOf(entry), parent)
-}
+): NavStack = NavStack(id, listOf(entry), parent)
 
 public class NavStackBuilder
-@PublishedApi
-internal constructor(
-    @PublishedApi internal val id: NavStructure.Id,
-    entries: List<NavEntry>,
-) {
     @PublishedApi
-    internal val entries: MutableList<NavEntry> = entries.toMutableList()
+    internal constructor(
+        @PublishedApi internal val id: NavStructure.Id,
+        entries: List<NavEntry>,
+    ) {
+        @PublishedApi
+        internal val entries: MutableList<NavEntry> = entries.toMutableList()
 
-    public fun add(entry: NavEntry): NavStackBuilder =
-        apply {
-            entries += entry
-        }
+        public fun add(entry: NavEntry): NavStackBuilder =
+            apply {
+                entries += entry
+            }
 
-    public fun add(vararg entries: NavEntry): NavStackBuilder =
-        apply {
-            this.entries += entries
-        }
+        public fun add(vararg entries: NavEntry): NavStackBuilder =
+            apply {
+                this.entries += entries
+            }
 
-    public fun addAll(entries: Iterable<NavEntry>): NavStackBuilder =
-        apply {
-            this.entries += entries
-        }
+        public fun addAll(entries: Iterable<NavEntry>): NavStackBuilder =
+            apply {
+                this.entries += entries
+            }
 
-    public fun add(
-        dest: NavDest,
-        tags: List<Any> = emptyList(),
-    ): NavStackBuilder =
-        apply {
-            add(NavEntry(dest, tags))
-        }
-}
+        public fun add(
+            dest: NavDest,
+            tags: List<Any> = emptyList(),
+        ): NavStackBuilder =
+            apply {
+                add(NavEntry(dest, tags))
+            }
+    }
 
 public inline fun buildNavStack(
     id: NavStructure.Id,
     body: NavStackBuilder.() -> Unit,
-): NavStack {
-    return NavStackBuilder(id, entries = emptyList())
+): NavStack =
+    NavStackBuilder(id, entries = emptyList())
         .apply(body)
         .let { builder -> NavStack(builder.id, builder.entries.toList()) }
-}

@@ -1,6 +1,5 @@
 package dev.arabicdictionary.pro.features.auth
 
-
 import dev.arabicdictionary.pro.arabicdictsdk.Response
 import dev.arabicdictionary.pro.arabicdictsdk.data.DeveloperToken
 import dev.arabicdictionary.pro.arabicdictsdk.validateFrameDeveloperToken
@@ -16,11 +15,12 @@ internal class CheckUserFrameTokenUseCase {
             val response = validateFrameDeveloperToken(DeveloperToken(frameToken))
             return when {
                 response is Response.Success -> Result.VALID
-                response is Response.NetworkError -> when {
-                    response.httpCode == 401 -> Result.INVALID
-                    response.httpCode / 500 == 1 -> Result.SERVER_ERROR
-                    else -> Result.UNKNOWN_ERROR
-                }
+                response is Response.NetworkError ->
+                    when {
+                        response.httpCode == 401 -> Result.INVALID
+                        response.httpCode / 500 == 1 -> Result.SERVER_ERROR
+                        else -> Result.UNKNOWN_ERROR
+                    }
                 else -> Result.UNKNOWN_ERROR
             }
         } catch (_: Exception) {

@@ -31,5 +31,5 @@ data class VerbMorphology(
     @SerialName("original") val original: WordId,
     @SerialName("base_form_number") val baseFormNumber: Int,
     @SerialName("conjugation") val conjugation: Conjugation,
-    @SerialName("grammatical_roles") val grammaticalRoles: VerbGrammaticalRoles
+    @SerialName("grammatical_roles") val grammaticalRoles: VerbGrammaticalRoles,
 )

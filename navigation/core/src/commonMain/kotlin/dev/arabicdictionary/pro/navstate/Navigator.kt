@@ -57,9 +57,10 @@ public class Navigator(
     private suspend fun execute(command: NavCommand): NavState {
         val curState = currentState
         val transformedState = command.transform(curState).also(::validate)
-        val (_, newState) = interceptors.fold(curState to transformedState) { (prevState, nextState), interceptor ->
-            nextState to interceptor.intercept(command, prevState, nextState)
-        }
+        val (_, newState) =
+            interceptors.fold(curState to transformedState) { (prevState, nextState), interceptor ->
+                nextState to interceptor.intercept(command, prevState, nextState)
+            }
         return newState.also(::validate)
     }
 

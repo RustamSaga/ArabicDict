@@ -11,19 +11,24 @@ import dev.arabicdictionary.pro.arabicdictsdk.data.words.particle.Particle
 import dev.arabicdictionary.pro.arabicdictsdk.data.words.verb.Verb
 
 interface DictionaryApi {
-
     @GET("verbs/{id}")
-    suspend fun getVerbById(@Path("id") id: String): Response<Verb>
+    suspend fun getVerbById(
+        @Path("id") id: String,
+    ): Response<Verb>
 
     @GET("nouns/{id}")
-    suspend fun getNounById(@Path("id") id: String): Response<Noun>
+    suspend fun getNounById(
+        @Path("id") id: String,
+    ): Response<Noun>
 
     @GET("particles/{id}")
-    suspend fun getParticleById(@Path("id") id: String): Response<Particle>
+    suspend fun getParticleById(
+        @Path("id") id: String,
+    ): Response<Particle>
 
     @GET("words")
     suspend fun getWords(
         @Query("query") query: String? = null,
-        @QueryMap filters: Map<String, String> = emptyMap()
+        @QueryMap filters: Map<String, String> = emptyMap(),
     ): Response<List<WordSummary>>
 }

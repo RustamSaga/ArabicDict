@@ -108,9 +108,9 @@ data class Noun(
     @SerialName("arabic_voweled") val arabicVoweled: String,
     @SerialName("arabic_unvoweled") val arabicUnvoweled: String,
     @SerialName("meanings_number") val meaningsNumber: Int,
-    @SerialName("meanings") val meanings: List<Meanings>, // definitions, translations, images url and categories
-    @SerialName("morphology") val nounMorphology: NounMorphology, // wordType, root, wordPatterns, structureType, original word, gender, numberType, morphologicalFeatures
-    @SerialName("variants") val variants: NounVariants,  // feminineNumberForms, masculineNumberForms, relativeAdjectives, wonder, diminutive
+    @SerialName("meanings") val meanings: List<Meanings>,
+    @SerialName("morphology") val nounMorphology: NounMorphology,
+    @SerialName("variants") val variants: NounVariants,
     @SerialName("relations") val relations: Relations,
-    @SerialName("word_dialect") val wordDialect: WordDialect
+    @SerialName("word_dialect") val wordDialect: WordDialect,
 )

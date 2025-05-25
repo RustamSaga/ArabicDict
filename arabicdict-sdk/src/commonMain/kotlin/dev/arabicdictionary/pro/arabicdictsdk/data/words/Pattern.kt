@@ -11,7 +11,8 @@ import kotlinx.serialization.Serializable
  * @property id The unique identifier for the word pattern.
  * @property arabicVoweled The pattern with vowel marks (tashkīl), used in fully vocalized words.
  * @property arabicUnvoweled The pattern without vowel marks (tashkīl), used in unvocalized words.
- * @property type The type of the pattern (e.g., "Diacritical Stem (DS)", "Canonical Stem (CS)", "Diacritical Lemma (DL)", Canonical Lemma (CL)), indicating its grammatical role.
+ * @property type The type of the pattern
+ *      (e.g., "Diacritical Stem (DS)", "Canonical Stem (CS)", "Diacritical Lemma (DL)", Canonical Lemma (CL)).
  * @property length The length of the pattern, often in terms of the number of syllables or letters.
  *
  * These patterns are used in morphological analysis to determine how a word is derived and classified,
@@ -34,5 +35,5 @@ data class Pattern(
     @SerialName("arabic_voweled") val arabicVoweled: String,
     @SerialName("arabic_unvoweled") val arabicUnvoweled: String,
     @SerialName("type") val type: String,
-    @SerialName("length") val length: Int
+    @SerialName("length") val length: Int,
 )

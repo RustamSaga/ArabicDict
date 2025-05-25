@@ -1,6 +1,5 @@
 package dev.arabicdictionary.pro.navstate
 
-
 public fun interface NavCommand {
     /**
      * Transform [NavState]
@@ -35,18 +34,16 @@ public fun interface NavCommand {
 private class NavCommandList(
     val commands: List<NavCommand>,
 ) : NavCommand {
-    override suspend fun transform(state: NavState): NavState {
-        return commands.fold(state) { accState, command -> command.transform(accState) }
-    }
+    override suspend fun transform(state: NavState): NavState = commands.fold(state)
+    { accState, command -> command.transform(accState) }
 
-    override fun then(command: NavCommand): NavCommand {
-        return NavCommandList(
+    override fun then(command: NavCommand): NavCommand =
+        NavCommandList(
             when (command) {
                 is NavCommandList -> commands + command.commands
                 else -> commands + command
             },
         )
-    }
 }
 
 public operator fun NavCommand.plus(command: NavCommand): NavCommand = then(command)

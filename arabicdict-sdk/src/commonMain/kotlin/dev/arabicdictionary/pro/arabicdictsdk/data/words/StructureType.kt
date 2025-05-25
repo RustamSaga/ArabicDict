@@ -31,5 +31,5 @@ import kotlinx.serialization.Serializable
 data class StructureType(
     @SerialName("id") val id: Int, // Unique ID of the structure type.
     @SerialName("arabic_unvoweled") val arabicUnvoweled: String, // Name without tashkīl.
-    @SerialName("arabic_voweled") val arabicVoweled: String // Name with tashkīl.
+    @SerialName("arabic_voweled") val arabicVoweled: String, // Name with tashkīl.
 )

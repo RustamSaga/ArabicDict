@@ -1,6 +1,5 @@
 package dev.arabicdictionary.pro.navstate
 
-
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -18,37 +17,34 @@ public data class NavState(
     }
 }
 
-public operator fun NavState.get(id: NavStructure.Id): NavStructure? {
-    return structures.firstNotNullOfOrNull { structure -> structure[id] }
-}
+public operator fun NavState.get(id: NavStructure.Id): NavStructure?
+    = structures.firstNotNullOfOrNull { structure -> structure[id] }
 
-public fun NavState.then(struct: NavStructure): NavState {
-    return copy(
-        structures = buildSet {
-            addAll(this@then.structures)
-            add(struct)
-        },
+public fun NavState.then(struct: NavStructure): NavState =
+    copy(
+        structures =
+            buildSet {
+                addAll(this@then.structures)
+                add(struct)
+            },
     )
-}
 
-public inline fun NavState.buildNavState(body: NavStateBuilder.() -> Unit): NavState {
-    return buildNavStateInternal(
+public inline fun NavState.buildNavState(body: NavStateBuilder.() -> Unit): NavState =
+    buildNavStateInternal(
         NavStateBuilder(
             structures = this.structures,
             currentStructId = this.currentId,
         ),
         body,
     )
-}
 
-public inline fun buildNavState(body: NavStateBuilder.() -> Unit): NavState {
-    return buildNavStateInternal(
+public inline fun buildNavState(body: NavStateBuilder.() -> Unit): NavState =
+    buildNavStateInternal(
         NavStateBuilder(
             structures = emptySet(),
         ),
         body,
     )
-}
 
 @PublishedApi
 internal inline fun buildNavStateInternal(
@@ -63,46 +59,46 @@ internal inline fun buildNavStateInternal(
     }
 
 public class NavStateBuilder
-@PublishedApi
-internal constructor(
-    structures: Set<NavStructure>,
     @PublishedApi
-    internal var currentStructId: NavStructure.Id? = null,
-) {
-    @PublishedApi
-    internal val structs: MutableMap<NavStructure.Id, NavStructure> =
-        structures
-            .associateBy(keySelector = { it.id })
-            .toMutableMap()
+    internal constructor(
+        structures: Set<NavStructure>,
+        @PublishedApi
+        internal var currentStructId: NavStructure.Id? = null,
+    ) {
+        @PublishedApi
+        internal val structs: MutableMap<NavStructure.Id, NavStructure> =
+            structures
+                .associateBy(keySelector = { it.id })
+                .toMutableMap()
 
-    public fun setCurrent(id: NavStructure.Id?): NavStateBuilder =
-        apply {
-            this.currentStructId = id
-        }
+        public fun setCurrent(id: NavStructure.Id?): NavStateBuilder =
+            apply {
+                this.currentStructId = id
+            }
 
-    public fun add(struct: NavStructure): NavStateBuilder =
-        apply {
-            structs[struct.id] = struct
-        }
+        public fun add(struct: NavStructure): NavStateBuilder =
+            apply {
+                structs[struct.id] = struct
+            }
 
-    public fun add(
-        struct: NavEntriesStructure,
-        setCurrent: Boolean = false,
-    ): NavStateBuilder =
-        apply {
-            structs[struct.id] = struct
-            if (setCurrent) setCurrent(struct.id)
-        }
+        public fun add(
+            struct: NavEntriesStructure,
+            setCurrent: Boolean = false,
+        ): NavStateBuilder =
+            apply {
+                structs[struct.id] = struct
+                if (setCurrent) setCurrent(struct.id)
+            }
 
-    public fun add(vararg structs: NavStructure): NavStateBuilder =
-        apply {
-            this.structs += structs.associateBy { it.id }
-        }
+        public fun add(vararg structs: NavStructure): NavStateBuilder =
+            apply {
+                this.structs += structs.associateBy { it.id }
+            }
 
-    public fun addAll(structs: Collection<NavStructure>): NavStateBuilder =
-        apply {
-            this.structs += structs.associateBy { it.id }
-        }
-}
+        public fun addAll(structs: Collection<NavStructure>): NavStateBuilder =
+            apply {
+                this.structs += structs.associateBy { it.id }
+            }
+    }
 
 public suspend fun NavState.transform(command: NavCommand): NavState = command.transform(this)

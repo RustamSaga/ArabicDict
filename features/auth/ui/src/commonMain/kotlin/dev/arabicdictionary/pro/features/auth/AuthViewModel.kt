@@ -1,6 +1,5 @@
 package dev.arabicdictionary.pro.features.auth
 
-
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.arabicdictionary.pro.common.features.ArabicDictNavGraph

@@ -3,7 +3,6 @@ package dev.arabicdictionary.pro.arabicdictsdk.data.words
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-
 /**
  * Data class representing a grammatical number category in Arabic (العدد).
  *
@@ -46,5 +45,5 @@ import kotlinx.serialization.Serializable
 data class NumberType(
     @SerialName("id") val id: Int, // The unique identifier for the number type.
     @SerialName("arabic_voweled") val arabicVoweled: String, // The number type in Arabic with vowel marks.
-    @SerialName("arabic_unvoweled") val arabicUnvoweled: String // The number type in Arabic without vowel marks.
+    @SerialName("arabic_unvoweled") val arabicUnvoweled: String, // The number type in Arabic without vowel marks.
 )
