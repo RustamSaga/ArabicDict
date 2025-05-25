@@ -1,17 +1,27 @@
-*.iml
-.kotlin/
-.gradle/
-**/build/
-xcuserdata
+# Android
 local.properties
-.idea/
 captures
 .externalNativeBuild
 .cxx
+
+# XCode
+xcuserdata
 *.xcodeproj/*
 !*.xcodeproj/project.pbxproj
 !*.xcodeproj/xcshareddata/
 !*.xcodeproj/project.xcworkspace/
 !*.xcworkspace/contents.xcworkspacedata
 **/xcshareddata/WorkspaceSettings.xcsettings
+
+# Gradle
+.gradle/
 build/
+
+# Kotlin
+.kotlin/
+
+# IDEA
+.idea/
+!.idea/icon.svg
+!.idea/externalDependencies.xml
+*.iml

@@ -1,0 +1,111 @@
+name: Assemble Builds
+
+on:
+  workflow_dispatch:
+    inputs:
+      build_ios:
+        description: 'Build iOS'
+        required: true
+        default: true
+        type: boolean
+      build_android:
+        description: 'Build Android'
+        required: true
+        default: true
+        type: boolean
+      build_windows:
+        description: 'Build Windows'
+        required: true
+        default: true
+        type: boolean
+
+concurrency:
+  group: main-branch
+  cancel-in-progress: true
+
+jobs:
+  build_ios:
+    if: github.event_name == 'push' || github.event.inputs.build_ios == 'true'
+    name: "Assemble iOS Simulator Build"
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          cache-disabled: false
+          cache-read-only: false
+          cache-write-only: false
+
+      - name: Build iOS App
+        run: |
+          xcodebuild -project iosApp/iosApp.xcodeproj -scheme iosApp -sdk iphonesimulator -configuration Release -arch x86_64 build
+  
+
+  build_android:
+    if: github.event_name == 'push' || github.event.inputs.build_android == 'true'
+    name: "Assemble Android Debug Build"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          cache-disabled: false
+          cache-read-only: false
+          cache-write-only: false
+
+      - name: Build Android Debug App
+        run: ./gradlew :ArabicDictApp:assembleDebug
+
+
+  build_windows:
+    if: github.event_name == 'push' || github.event.inputs.build_windows == 'true'
+    name: "Assemble Windows Debug build"
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          cache-disabled: false
+          cache-read-only: false
+          cache-write-only: false
+
+      - name: Cache Kotlin/Native
+        uses: actions/cache@v4
+        with:
+          path: ~/.konan
+          key: konan-${{ runner.os }}-${{ hashFiles('**/*.gradle.kts', '**/gradle.properties', '**/settings.gradle.kts') }}
+          restore-keys: |
+            konan-${{ runner.os }}-
+
+      - name: Package Desktop MSI build for Windows
+        run: ./gradlew :ArabicDictApp:packageMsi

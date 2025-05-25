@@ -1,0 +1,129 @@
+name: Code Quality Checks
+
+on:
+  pull_request:
+    branches: [ "main" ]
+    paths:
+      - '**/*.kt'
+      - '**/*.kts'
+      - 'gradle/**'
+      - 'gradle.properties'
+      - 'settings.gradle.kts'
+      - '**/build.gradle.kts'
+      - 'build.gradle.kts'
+      - 'config/**'
+      - '.github/workflows/code_quality_check.yml.yml'
+
+concurrency:
+  group: pr-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  kotlin_quality_checks:
+    name: Check Kotlin code
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Check Kotlin code
+        run: ./gradlew :ktlintCheck :detekt --continue
+
+      - name: Save KtLint Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ktlint-report
+          path: build/reports/ktlint/
+
+      - name: Save Detekt Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: detekt-report
+          path: build/reports/detekt
+
+      - name: Save Gradle Problems Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gradle-problems-report
+          path: build/reports/problems
+
+      - name: Publish Checkstyle report
+        uses: Juuxel/publish-checkstyle-report@v1
+        if: ${{ failure() || success() }}
+        with:
+          reports: |
+            build/reports/detekt/*.xml
+            build/reports/ktlint/*.xml
+
+  android_quality_checks:
+    name: Check Android code
+    runs-on: ubuntu-latest
+    needs: kotlin_quality_checks
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Android Manifest Guard
+        run: ./gradlew :ArabicDictApp:compareDebugMergedManifest :ArabicDictApp:compareReleaseMergedManifest --continue
+
+      - name: Android Lint
+        run: ./gradlew :ArabicDictApp:lintDebug
+
+      - name: Save Android Lint Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-lint-report
+          path: arabicdict-app/build/reports/lint-results-debug.html
+
+  build-ios:
+    name: Check iOS compilation
+    needs: kotlin_quality_checks
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Cache Kotlin/Native
+        uses: actions/cache@v4
+        with:
+          path: ~/.konan
+          key: konan-${{ runner.os }}-${{ hashFiles('**/*.gradle.kts', '**/gradle.properties', '**/settings.gradle.kts') }}
+          restore-keys: |
+            konan-${{ runner.os }}-
+
+      - name: Build iOS Targets
+        run: ./gradlew :ArabicDictApp:linkDebugFrameworkIosX64
