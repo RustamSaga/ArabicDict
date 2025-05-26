@@ -17,7 +17,7 @@ public open class NavGroup(
     override val current: NavStructure? = null
 
     public override operator fun get(id: NavStructure.Id): NavEntriesStructure?
-        = structures.find { structure -> structure.id == id }
+    = structures.find { structure -> structure.id == id }
 
     override fun validate() {
         check(structures.isNotEmpty()) { "Must have at least one NavStructure" }
