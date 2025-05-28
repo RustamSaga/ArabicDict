@@ -33,8 +33,8 @@ import arabicdictionarypro.features.auth.ui.generated.resources.Res
 import arabicdictionarypro.features.auth.ui.generated.resources.auth_in_progress
 import arabicdictionarypro.features.auth.ui.generated.resources.auth_user_data_hint
 import arabicdictionarypro.features.auth.ui.generated.resources.dont_have_account
+import arabicdictionarypro.features.auth.ui.generated.resources.error_arabicdict_dev_token
 import arabicdictionarypro.features.auth.ui.generated.resources.error_email_auth_not_supported
-import arabicdictionarypro.features.auth.ui.generated.resources.error_frame_dev_token
 import arabicdictionarypro.features.auth.ui.generated.resources.error_invalid_auth_text
 import arabicdictionarypro.features.auth.ui.generated.resources.error_server_error
 import arabicdictionarypro.features.auth.ui.generated.resources.error_unknown
@@ -130,7 +130,7 @@ private fun AuthPane(
 private fun readableMessageForError(error: AuthError?) =
     when (error) {
         AuthError.INVALID_AUTH_TEXT -> stringResource(Res.string.error_invalid_auth_text)
-        AuthError.INVALID_FRAME_DEV_TOKEN -> stringResource(Res.string.error_frame_dev_token)
+        AuthError.INVALID_ARABICDICT_DEV_TOKEN -> stringResource(Res.string.error_arabicdict_dev_token)
         AuthError.EMAIL_AUTH_NOT_SUPPORTED -> stringResource(Res.string.error_email_auth_not_supported)
         AuthError.SERVER_ERROR -> stringResource(Res.string.error_server_error)
         AuthError.UNKNOWN -> stringResource(Res.string.error_unknown)

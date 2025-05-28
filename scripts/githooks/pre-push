@@ -61,7 +61,7 @@ fi
 ########################################
 
 # Run Android Guard check
-./gradlew :FrameIOApp:compareDebugMergedManifest :FrameIOApp:compareReleaseMergedManifest --continue --warn
+./gradlew :ArabicDictApp:compareDebugMergedManifest :ArabicDictApp:compareReleaseMergedManifest --continue --warn
 AndroidGuardStatus=$?
 
 if [ $AndroidGuardStatus -ne 0 ]; then

@@ -6,13 +6,13 @@ import dev.arabicdictionary.pro.core.utils.validateEmail
  * Classifies user auth text
  */
 internal class ValidateUserAuthTextUseCase {
-    private val frameTokenRegex = Regex("[-\\w]+")
+    private val arabicdictTokenRegex = Regex("[-\\w]+")
 
     operator fun invoke(authText: String): Result =
         when {
             authText.isBlank() -> Result.EMPTY
             validateEmail(authText) -> Result.EMAIL
-            frameTokenRegex.matches(authText) -> Result.MAYBE_TOKEN
+            arabicdictTokenRegex.matches(authText) -> Result.MAYBE_TOKEN
             else -> Result.UNKNOWN
         }
 

@@ -13,13 +13,13 @@ internal fun authFeatureKoinModule(): Module =
             AuthViewModel(
                 navigator = get<Navigator>(),
                 validateUserAuthTextUseCaseProvider = ::get,
-                checkUserFrameTokenUseCaseProvider = ::get,
+                checkUserArabicdictTokenUseCaseProvider = ::get,
             )
         }
 
         factoryOf(::ValidateUserAuthTextUseCase)
 
-        factoryOf(::CheckUserFrameTokenUseCase)
+        factoryOf(::CheckUserArabicdictTokenUseCase)
 
         scope(authKoinScopeQualifier) {
             // Add scoped dependencies

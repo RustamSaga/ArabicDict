@@ -105,11 +105,13 @@ private fun preparePath(
     }
 }
 
-private fun prepareHost(host: String): String =
-    if (host == ANY_REGEX) "(?<$GROUP_HOST>[\\w-_.]+)" else "(?<$GROUP_HOST>$host)"
+private fun prepareHost(host: String): String {
+    return if (host == ANY_REGEX) "(?<$GROUP_HOST>[\\w-_.]+)" else "(?<$GROUP_HOST>$host)"
+}
 
-private fun prepareScheme(scheme: String): String =
-    if (scheme == ANY_REGEX) "(?<$GROUP_SCHEME>[\\w]+)" else "(?<$GROUP_SCHEME>$scheme)"
+private fun prepareScheme(scheme: String): String {
+    return if (scheme == ANY_REGEX) "(?<$GROUP_SCHEME>[\\w]+)" else "(?<$GROUP_SCHEME>$scheme)"
+}
 
 public fun SimpleUriPattern(uriPattern: String): SimpleUriPattern {
     val matchResult =

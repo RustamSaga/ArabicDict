@@ -24,7 +24,7 @@ internal sealed interface AuthEvent {
 
 internal enum class AuthError {
     INVALID_AUTH_TEXT,
-    INVALID_FRAME_DEV_TOKEN,
+    INVALID_ARABICDICT_DEV_TOKEN,
     EMAIL_AUTH_NOT_SUPPORTED,
     SERVER_ERROR,
     UNKNOWN,
@@ -52,7 +52,7 @@ internal sealed class AuthState {
 internal class AuthViewModel(
     private val navigator: Navigator,
     private val validateUserAuthTextUseCaseProvider: () -> ValidateUserAuthTextUseCase,
-    private val checkUserFrameTokenUseCaseProvider: () -> CheckUserFrameTokenUseCase,
+    private val checkUserArabicdictTokenUseCaseProvider: () -> CheckUserArabicdictTokenUseCase,
 ) : ViewModel() {
     private val _state = MutableStateFlow(AuthState.default())
     val state = _state.asStateFlow()
@@ -60,8 +60,8 @@ internal class AuthViewModel(
     fun onEvent(event: AuthEvent) {
         when (event) {
             is AuthEvent.OnNextClicked -> onNextClicked()
-            is AuthEvent.OnRequestTokenClick -> navigator.open(FRAMEIO_CREATE_TOKEN_URL)
-            is AuthEvent.OnSignUpClick -> navigator.open(FRAMEIO_REGISTER_URL)
+            is AuthEvent.OnRequestTokenClick -> navigator.open(ARABICDICT_CREATE_TOKEN_URL)
+            is AuthEvent.OnSignUpClick -> navigator.open(ARABICDICT_REGISTER_URL)
             is AuthEvent.OnUserAuthTextChanged -> onUserAuthTextChanged(event.text)
         }
     }
@@ -103,22 +103,22 @@ internal class AuthViewModel(
     }
 
     private suspend fun checkToken(frameDevToken: String) {
-        when (checkUserFrameTokenUseCaseProvider().invoke(frameDevToken)) {
-            CheckUserFrameTokenUseCase.Result.VALID -> {
+        when (checkUserArabicdictTokenUseCaseProvider().invoke(frameDevToken)) {
+            CheckUserArabicdictTokenUseCase.Result.VALID -> {
                 // TODO Start auth user session
                 // TODO Save dev token
                 navigator.enqueue(NavCommand.forward(ArabicDictNavGraph.Alias.Main))
                 return
             }
 
-            CheckUserFrameTokenUseCase.Result.INVALID -> returnToDefaultState(AuthError.INVALID_FRAME_DEV_TOKEN)
-            CheckUserFrameTokenUseCase.Result.SERVER_ERROR -> returnToDefaultState(AuthError.SERVER_ERROR)
-            CheckUserFrameTokenUseCase.Result.UNKNOWN_ERROR -> returnToDefaultState(AuthError.UNKNOWN)
+            CheckUserArabicdictTokenUseCase.Result.INVALID -> returnToDefaultState(AuthError.INVALID_ARABICDICT_DEV_TOKEN)
+            CheckUserArabicdictTokenUseCase.Result.SERVER_ERROR -> returnToDefaultState(AuthError.SERVER_ERROR)
+            CheckUserArabicdictTokenUseCase.Result.UNKNOWN_ERROR -> returnToDefaultState(AuthError.UNKNOWN)
         }
     }
 
     private companion object {
-        const val FRAMEIO_REGISTER_URL = "https://accounts.frame.io/welcome"
-        const val FRAMEIO_CREATE_TOKEN_URL = "https://developer.frame.io/app/tokens"
+        const val ARABICDICT_REGISTER_URL = "https://accounts.frame.io/welcome"
+        const val ARABICDICT_CREATE_TOKEN_URL = "https://developer.frame.io/app/tokens"
     }
 }

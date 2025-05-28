@@ -2,17 +2,17 @@ package dev.arabicdictionary.pro.features.auth
 
 import dev.arabicdictionary.pro.arabicdictsdk.Response
 import dev.arabicdictionary.pro.arabicdictsdk.data.DeveloperToken
-import dev.arabicdictionary.pro.arabicdictsdk.validateFrameDeveloperToken
+import dev.arabicdictionary.pro.arabicdictsdk.validateArabicdictDeveloperToken
 
 /**
- * Verify that dev token is valid and cen vbe used to access Frame API.
+ * Verify that dev token is valid and cen vbe used to access ArabicDict API.
  * The use-case makes a request to Frame API to check the token.
  */
-internal class CheckUserFrameTokenUseCase {
+internal class CheckUserArabicdictTokenUseCase {
     @Suppress("TooGenericExceptionCaught", "SwallowedException", "MagicNumber")
-    suspend operator fun invoke(frameToken: String): Result {
+    suspend operator fun invoke(arabicdictToken: String): Result {
         try {
-            val response = validateFrameDeveloperToken(DeveloperToken(frameToken))
+            val response = validateArabicdictDeveloperToken(DeveloperToken(arabicdictToken))
             return when {
                 response is Response.Success -> Result.VALID
                 response is Response.NetworkError ->
