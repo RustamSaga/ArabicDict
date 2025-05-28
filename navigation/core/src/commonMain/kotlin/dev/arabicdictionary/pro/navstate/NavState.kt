@@ -17,8 +17,8 @@ public data class NavState(
     }
 }
 
-public operator fun NavState.get(id: NavStructure.Id): NavStructure?
-    = structures.firstNotNullOfOrNull { structure -> structure[id] }
+public operator fun NavState.get(id: NavStructure.Id): NavStructure? =
+    structures.firstNotNullOfOrNull { structure -> structure[id] }
 
 public fun NavState.then(struct: NavStructure): NavState =
     copy(
