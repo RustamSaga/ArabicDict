@@ -1,0 +1,21 @@
+<resources>
+    <string name="welcome">أهلاً وسهلاً</string>
+    <string name="welcome_message">أدخل رمز ArabicDict لتسجيل الدخول.</string>
+    <string name="auth_user_data_hint">الرمز</string>
+    <string name="next">التالي</string>
+    <string name="request_token">طلب رمز</string>
+    <string name="dont_have_account">لا تملك حسابًا؟ </string>
+    <string name="signup">إنشاء حساب</string>
+    <string name="auth_in_progress">جاري تسجيل الدخول...</string>
+    <string name="waiting_message">يرجى الانتظار قليلاً</string>
+
+    <string name="error_invalid_auth_text">إدخال غير صالح</string>
+    <string name="error_arabicdict_dev_token">تحقق من رمز المطور لـ ArabicDict وحاول مرة أخرى</string>
+    <string name="error_email_auth_not_supported">سيتم إضافة تسجيل الدخول بالبريد الإلكتروني/كلمة المرور لاحقًا</string>
+    <string name="error_server_error">خطأ في الخادم. حاول مرة أخرى لاحقًا</string>
+    <string name="error_unknown">خطأ غير معروف</string>
+    <string name="localization">اختر اللغة</string>
+    <string name="choosing_language">اختر اللغة</string>
+
+    <string name="lang">ar</string>
+</resources>

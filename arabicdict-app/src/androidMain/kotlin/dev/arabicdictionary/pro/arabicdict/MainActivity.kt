@@ -14,6 +14,7 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             ArabicDictComposeApp(
+                platformContext = applicationContext,
                 onRootBack = { finish() },
             )
         }

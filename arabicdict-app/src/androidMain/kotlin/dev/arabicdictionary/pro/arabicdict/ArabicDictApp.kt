@@ -13,7 +13,7 @@ class ArabicDictApp : Application() {
             androidContext(this@ArabicDictApp)
             initKoinApp(
                 platformContext = this@ArabicDictApp,
-                isDebug = BuildConfig.DEBUG,
+                isDebug = BuildConfig.DEBUG
             )
         }
     }

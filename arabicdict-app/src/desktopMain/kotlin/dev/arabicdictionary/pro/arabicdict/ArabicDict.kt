@@ -8,9 +8,10 @@ import dev.arabicdictionary.pro.arabicdict.common.app.initKoinApp
 import dev.arabicdictionary.pro.compose.ArabicDictComposeApp
 import dev.arabicdictionary.pro.core.utils.PlatformContext
 import org.koin.core.context.startKoin
+import dev.arabicdictionary.pro.core.uikit.localization.PlatformContext as locale
 
 @Suppress("ktlint:standard:function-signature")
-fun main() =
+fun main() {
     application {
         startKoin {
             initKoinApp(
@@ -23,6 +24,10 @@ fun main() =
             onCloseRequest = ::exitApplication,
             title = "ArabicDict",
         ) {
-            ArabicDictComposeApp(onRootBack = { exitApplication() })
+            ArabicDictComposeApp(
+                platformContext = locale.INSTANCE,
+                onRootBack = { exitApplication() },
+            )
         }
     }
+}

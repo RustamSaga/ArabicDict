@@ -19,7 +19,7 @@ internal class ResponseConverterFactory : Converter.Factory {
                 override suspend fun convert(result: KtorfitResult): Any =
                     when (result) {
                         is KtorfitResult.Failure -> ArabicResponse.Error(result.throwable)
-                        is KtorfitResult.Success -> result.toFrameResponse(typeData)
+                        is KtorfitResult.Success -> result.toArabicdictResponse(typeData)
                     }
             }
         }
@@ -27,7 +27,7 @@ internal class ResponseConverterFactory : Converter.Factory {
     }
 
     @Suppress("MagicNumber")
-    private suspend fun KtorfitResult.Success.toFrameResponse(typeData: TypeData): ArabicResponse<*> =
+    private suspend fun KtorfitResult.Success.toArabicdictResponse(typeData: TypeData): ArabicResponse<*> =
         when {
             response.status.value in 200..299 && typeData.typeArgs[0].typeInfo.type == Unit::class ->
                 ArabicResponse.Success<Unit>(

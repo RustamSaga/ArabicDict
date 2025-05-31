@@ -7,11 +7,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import dev.arabicdictionary.pro.common.features.ArabicDictNavGraph
 import dev.arabicdictionary.pro.core.uikit.ArabicDictTheme
+import dev.arabicdictionary.pro.core.uikit.localization.LocalizationChanger
+import dev.arabicdictionary.pro.core.uikit.localization.PlatformContext
 import dev.arabicdictionary.pro.core.utils.UrlLauncher
 import dev.arabicdictionary.pro.features.auth.AuthPane
 import dev.arabicdictionary.pro.navstate.NavCommand
@@ -29,37 +32,58 @@ import dev.arabicdictionary.pro.navstate.stack.NavStack
 import org.koin.compose.KoinContext
 import org.koin.compose.LocalKoinApplication
 import org.koin.compose.module.rememberKoinModules
+import org.koin.compose.scope.KoinScope
+import org.koin.compose.viewmodel.koinViewModel
+import org.koin.core.annotation.KoinExperimentalAPI
 import org.koin.dsl.module
 import org.koin.core.module.Module as KoinModule
 
+@OptIn(KoinExperimentalAPI::class)
 @Composable
 @Suppress("ModifierMissing")
-fun ArabicDictComposeApp(onRootBack: () -> Unit) {
+fun ArabicDictComposeApp(
+    platformContext: PlatformContext,
+    onRootBack: () -> Unit
+) {
     KoinContext {
-        ArabicDictTheme {
-            Scaffold(
-                containerColor = ArabicDictTheme.colors.surfaceDim,
-                modifier = Modifier.fillMaxSize(),
-            ) { contentPaddings ->
-                NavHost(
-                    navigator = createNavigator(),
-                    onRootBack = onRootBack,
-                ) {
-                    Box(
-                        contentAlignment = Alignment.Center,
-                        modifier =
-                            Modifier
-                                .fillMaxSize()
-                                .padding(contentPaddings)
-                                .padding(16.dp),
+        KoinScope(LOCALIZATION_SCOPE_ID, localizationKoinScopeQualifier) {
+            rememberKoinModules {
+                listOf(localizationKoinModule())
+            }
+            val viewModel: LocalizationViewModel = koinViewModel<LocalizationViewModel>()
+            val state = viewModel.state.collectAsState().value
+
+            ArabicDictTheme(
+                localization = state,
+                platformContext = platformContext
+            ) {
+                Scaffold(
+                    containerColor = ArabicDictTheme.colors.surfaceDim,
+                    modifier = Modifier.fillMaxSize(),
+                ) { contentPaddings ->
+                    NavHost(
+                        navigator = createNavigator(),
+                        onRootBack = onRootBack,
                     ) {
-                        val navTopEntry = rememberNavTopEntry()
-                        AnimatedContent(navTopEntry) { navEntry ->
-                            when (navEntry.destination as ArabicDictNavGraph.Dest) {
-                                is ArabicDictNavGraph.Dest.AssetNavigator -> StubScreen("Asset Navigator")
-                                is ArabicDictNavGraph.Dest.Auth -> AuthPane()
-                                is ArabicDictNavGraph.Dest.ProjectNavigator -> StubScreen("Project Navigator")
-                                is ArabicDictNavGraph.Alias -> error("Impossible to open alias")
+                        Box(
+                            contentAlignment = Alignment.Center,
+                            modifier =
+                                Modifier
+                                    .fillMaxSize()
+                                    .padding(contentPaddings)
+                                    .padding(16.dp),
+                        ) {
+                            val navTopEntry = rememberNavTopEntry()
+                            AnimatedContent(navTopEntry) { navEntry ->
+                                when (navEntry.destination as ArabicDictNavGraph.Dest) {
+                                    is ArabicDictNavGraph.Dest.AssetNavigator -> StubScreen("Asset Navigator")
+                                    is ArabicDictNavGraph.Dest.Auth -> AuthPane(onChangeLanguage = {
+                                        viewModel.update(it)
+                                        LocalizationChanger.update(it)
+                                    })
+                                    is ArabicDictNavGraph.Dest.ProjectNavigator -> StubScreen("Project Navigator")
+                                    is ArabicDictNavGraph.Alias -> error("Impossible to open alias")
+                                }
                             }
                         }
                     }
@@ -88,6 +112,7 @@ private fun koinModule(navigator: Navigator): KoinModule =
         factory { navigator }
     }
 
+@OptIn(KoinExperimentalAPI::class)
 @Composable
 private fun createNavigator(): Navigator {
     val koinApp = LocalKoinApplication.current

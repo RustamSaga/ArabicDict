@@ -1,0 +1,21 @@
+<resources>
+    <string name="welcome">Добро пожаловать</string>
+    <string name="welcome_message">Введите ваш токен ArabicDict для входа.</string>
+    <string name="auth_user_data_hint">Токен</string>
+    <string name="next">Далее</string>
+    <string name="request_token">Запросить токен</string>
+    <string name="dont_have_account">Нет аккаунта? </string>
+    <string name="signup">Зарегистрироваться</string>
+    <string name="auth_in_progress">Авторизация...</string>
+    <string name="waiting_message">Пожалуйста, подождите</string>
+
+    <string name="error_invalid_auth_text">Неверный ввод</string>
+    <string name="error_arabicdict_dev_token">Проверьте токен разработчика ArabicDict и попробуйте снова</string>
+    <string name="error_email_auth_not_supported">Вход по email и паролю будет добавлен позже</string>
+    <string name="error_server_error">Ошибка сервера. Попробуйте позже</string>
+    <string name="error_unknown">Неизвестная ошибка</string>
+    <string name="localization">Выбрать язык</string>
+    <string name="choosing_language">Выберите язык</string>
+
+    <string name="lang">ru</string>
+</resources>

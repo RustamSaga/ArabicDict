@@ -43,14 +43,18 @@ public data class NavStack(
         }
     }
 
-    override fun copy(entries: List<NavEntry>): NavStack = copy(id = id, entries = entries, parent = parent)
+    override fun copy(entries: List<NavEntry>): NavStack {
+        return copy(id = id, entries = entries, parent = parent)
+    }
 }
 
 public fun NavStack(
     id: NavStructure.Id,
     entry: NavEntry,
     parent: NavStructure? = null,
-): NavStack = NavStack(id, listOf(entry), parent)
+): NavStack {
+    return NavStack(id, listOf(entry), parent)
+}
 
 public class NavStackBuilder
     @PublishedApi
@@ -88,7 +92,8 @@ public class NavStackBuilder
 public inline fun buildNavStack(
     id: NavStructure.Id,
     body: NavStackBuilder.() -> Unit,
-): NavStack =
-    NavStackBuilder(id, entries = emptyList())
+): NavStack {
+    return NavStackBuilder(id, entries = emptyList())
         .apply(body)
         .let { builder -> NavStack(builder.id, builder.entries.toList()) }
+}

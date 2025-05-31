@@ -17,7 +17,7 @@
     <uses-permission android:name="dev.arabicdictionary.pro.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
 
     <application
-        android:name="dev.arabicdictionary.pro.FrameIOApp"
+        android:name="dev.arabicdictionary.pro.ArabicDictApp"
         android:allowBackup="false"
         android:appComponentFactory="androidx.core.app.CoreComponentFactory"
         android:extractNativeLibs="false"

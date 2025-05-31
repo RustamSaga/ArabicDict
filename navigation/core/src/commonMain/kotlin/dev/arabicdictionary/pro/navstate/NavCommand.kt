@@ -34,8 +34,10 @@ public fun interface NavCommand {
 private class NavCommandList(
     val commands: List<NavCommand>,
 ) : NavCommand {
-    override suspend fun transform(state: NavState): NavState = commands.fold(state)
-    { accState, command -> command.transform(accState) }
+    override suspend fun transform(state: NavState): NavState =
+        commands.fold(state) { accState, command ->
+            command.transform(accState)
+        }
 
     override fun then(command: NavCommand): NavCommand =
         NavCommandList(

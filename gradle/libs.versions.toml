@@ -29,7 +29,8 @@ compose-rules = "0.4.22"
 ktlint = "1.5.0"
 manifestGuard = "1.0.0"
 koin = "4.0.4"
-
+datastore = "1.1.1"
+settings = "1.0.2"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -61,6 +62,8 @@ kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime",
 ktorfit = { group = "de.jensklingenberg.ktorfit", name = "ktorfit-lib-light", version.ref = "ktorfit" }
 ktorfit-converters-response = { group = "de.jensklingenberg.ktorfit", name = "ktorfit-converters-response", version.ref = "ktorfit" }
 
+remember-settings = { module = "dev.burnoo:compose-remember-setting", version.ref = "settings" }
+
 ktor-client-core = { group = "io.ktor", name = "ktor-client-core", version.ref = "ktor" }
 ktor-client-engine-cio = { group = "io.ktor", name = "ktor-client-cio", version.ref = "ktor" }
 ktor-client-engine-okhttp = { group = "io.ktor", name = "ktor-client-okhttp", version.ref = "ktor" }
@@ -79,6 +82,9 @@ gradleplugins-detekt = { module = "io.gitlab.arturbosch.detekt:io.gitlab.arturbo
 detektPlugin-nlopez-composeRules = { module = "io.nlopez.compose.rules:detekt", version.ref = "compose-rules" }
 
 ktlint-cli = { module = "com.pinterest.ktlint:ktlint-cli", version.ref = "ktlint" }
+
+datastore = { module = "androidx.datastore:datastore", version.ref = "datastore" }
+datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastore" }
 
 # KOIN
 koin-bom = { module = "io.insert-koin:koin-bom", version.ref = "koin" }

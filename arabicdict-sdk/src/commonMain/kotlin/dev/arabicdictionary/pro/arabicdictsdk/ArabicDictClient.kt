@@ -50,20 +50,20 @@ fun ArabicDictClient(
     baseUrl: String = ArabicDictClient.API_BASE_URL,
     json: Json = DefaultJson,
 ): ArabicDictClient {
-    val httpClient = frameHttpClient(developerToken, json)
+    val httpClient = arabicdictHttpClient(developerToken, json)
     return ArabicDictClient(baseUrl, httpClient)
 }
 
-suspend fun validateFrameDeveloperToken(
+suspend fun validateArabicdictDeveloperToken(
     developerToken: DeveloperToken,
     baseUrl: String = ArabicDictClient.API_BASE_URL,
     json: Json = DefaultJson,
 ): Response<Unit> {
-    val httpClient = frameHttpClient(developerToken, json)
+    val httpClient = arabicdictHttpClient(developerToken, json)
     return ArabicDictClient(baseUrl, httpClient).auth.isValid()
 }
 
-private fun frameHttpClient(
+private fun arabicdictHttpClient(
     developerToken: DeveloperToken,
     json: Json? = null,
 ): HttpClient =
@@ -78,12 +78,12 @@ private fun frameHttpClient(
 
         if (json != null) {
             install(ContentNegotiation) {
-                json(jsonForFrame(json))
+                json(jsonForArabicdict(json))
             }
         }
     }
 
-private fun jsonForFrame(baseJson: Json): Json =
+private fun jsonForArabicdict(baseJson: Json): Json =
     Json(from = baseJson) {
         ignoreUnknownKeys = true
         classDiscriminator = "_type"
