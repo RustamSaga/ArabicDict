@@ -6,6 +6,8 @@ import dev.arabicdictionary.pro.compose.ArabicDictComposeApp
 import dev.arabicdictionary.pro.core.utils.PlatformContext
 import org.koin.core.context.startKoin
 import platform.Foundation.NSProcessInfo
+import dev.arabicdictionary.pro.core.uikit.localization.PlatformContext as locale
+
 
 private fun isDebugBuild(): Boolean = NSProcessInfo.processInfo.environment["DEBUG"] == "1"
 
@@ -21,6 +23,9 @@ fun MainViewController() =
             }
         },
         content = {
-            ArabicDictComposeApp(onRootBack = {})
+            ArabicDictComposeApp(
+                platformContext = locale.INSTANCE,
+                onRootBack = {}
+            )
         },
     )

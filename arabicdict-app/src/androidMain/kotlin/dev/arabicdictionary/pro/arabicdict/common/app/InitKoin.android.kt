@@ -1,7 +1,9 @@
 package dev.arabicdictionary.pro.arabicdict.common.app
 
+import dev.arabicdictionary.pro.core.uikit.localization.ArabicDictLocalization
 import dev.arabicdictionary.pro.core.utils.PlatformContext
 import dev.arabicdictionary.pro.core.utils.UrlLauncher
+import dev.arabicdictionary.pro.core.utils.datastore.createDataStore
 import org.koin.android.logger.AndroidLogger
 import org.koin.core.logger.Level
 import org.koin.core.logger.Logger
@@ -13,4 +15,6 @@ internal actual fun defaultKoinLogger(level: Level): Logger = AndroidLogger(leve
 internal actual fun platformKoinModule(platformContext: PlatformContext): Module =
     module {
         factory { UrlLauncher(platformContext) }
+        single { ArabicDictLocalization(platformContext) }
+        single { createDataStore(platformContext) }
     }

@@ -12,6 +12,9 @@ kotlin {
             implementation(projects.featuresCommon)
             implementation(libs.kotlinx.serialization.json)
             implementation(projects.core.utils)
+            implementation(libs.datastore.preferences)
+            implementation(libs.datastore)
+            implementation(libs.koin.compose.viewmodel)
         }
     }
 }

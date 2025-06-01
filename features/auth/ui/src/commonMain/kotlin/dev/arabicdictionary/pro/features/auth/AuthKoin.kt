@@ -1,5 +1,6 @@
 package dev.arabicdictionary.pro.features.auth
 
+import dev.arabicdictionary.pro.core.uikit.localization.ArabicDictLocalization
 import dev.arabicdictionary.pro.navstate.Navigator
 import org.koin.core.module.Module
 import org.koin.core.module.dsl.factoryOf
@@ -11,6 +12,7 @@ internal fun authFeatureKoinModule(): Module =
     module {
         viewModel {
             AuthViewModel(
+                localization = get<ArabicDictLocalization>(),
                 navigator = get<Navigator>(),
                 validateUserAuthTextUseCaseProvider = ::get,
                 checkUserArabicdictTokenUseCaseProvider = ::get,

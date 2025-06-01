@@ -1,14 +1,25 @@
 package dev.arabicdictionary.pro.features.auth
 
+import androidx.compose.runtime.Composable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.arabicdictionary.pro.common.features.ArabicDictNavGraph
+import dev.arabicdictionary.pro.core.uikit.localization.ArabicDictLocalization
 import dev.arabicdictionary.pro.navstate.NavCommand
 import dev.arabicdictionary.pro.navstate.Navigator
 import dev.arabicdictionary.pro.navstate.forward
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import org.jetbrains.compose.resources.StringResource
+import org.jetbrains.compose.resources.stringResource
+
+internal class StringProvider {
+    @Composable
+    fun get(id: StringResource): String {
+        return stringResource(id)
+    }
+}
 
 internal sealed interface AuthEvent {
     class OnNextClicked : AuthEvent
@@ -20,6 +31,10 @@ internal sealed interface AuthEvent {
     class OnRequestTokenClick : AuthEvent
 
     class OnSignUpClick : AuthEvent
+
+    data class OnLanguageChange(
+        val iso: String
+    ): AuthEvent
 }
 
 internal enum class AuthError {
@@ -50,12 +65,15 @@ internal sealed class AuthState {
 }
 
 internal class AuthViewModel(
+    private val localization: ArabicDictLocalization,
     private val navigator: Navigator,
     private val validateUserAuthTextUseCaseProvider: () -> ValidateUserAuthTextUseCase,
     private val checkUserArabicdictTokenUseCaseProvider: () -> CheckUserArabicdictTokenUseCase,
 ) : ViewModel() {
     private val _state = MutableStateFlow(AuthState.default())
     val state = _state.asStateFlow()
+    private val _localizationState = MutableStateFlow(StringProvider())
+    val localizationState = _localizationState.asStateFlow()
 
     fun onEvent(event: AuthEvent) {
         when (event) {
@@ -63,6 +81,10 @@ internal class AuthViewModel(
             is AuthEvent.OnRequestTokenClick -> navigator.open(ARABICDICT_CREATE_TOKEN_URL)
             is AuthEvent.OnSignUpClick -> navigator.open(ARABICDICT_REGISTER_URL)
             is AuthEvent.OnUserAuthTextChanged -> onUserAuthTextChanged(event.text)
+            is AuthEvent.OnLanguageChange -> {
+                localization.applyLanguage(event.iso)
+                _localizationState.value = StringProvider()
+            }
         }
     }
 

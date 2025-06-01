@@ -13,6 +13,8 @@ kotlin {
             implementation(projects.composeApp)
             implementation(projects.core.utils)
             implementation(compose.components.resources)
+            api(libs.datastore.preferences)
+            api(libs.datastore)
         }
 
         androidMain.dependencies {
